@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const Navbar = ({ searchQuery, handleInputField, handleFormSubmit, inputRef }) => {
+const Navbar = ({ searchQuery, handleInputField, handleFormSubmit, inputRef, savedFavouriteItem }) => {
 
   const navActive = ({ isActive }) => {
     return {
@@ -24,7 +24,7 @@ const Navbar = ({ searchQuery, handleInputField, handleFormSubmit, inputRef }) =
       </form>
       <div className="menu flex gap-5 text-gray-400 hover:text-gray-600 duration-300">
         <NavLink style={navActive} to='/'>Home</NavLink>
-        <NavLink style={navActive} to='/favourites'>Favourites <span className="text-sky-400 font-extrabold">(0)</span> </NavLink>
+        <NavLink style={navActive} to='/favourites'>Favourites <span className="text-sky-400 font-extrabold">({savedFavouriteItem.length})</span> </NavLink>
       </div>
     </nav>
   );
