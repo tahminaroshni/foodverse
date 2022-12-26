@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Favourites from "./components/Favourites";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
@@ -18,6 +18,7 @@ function App() {
   })
 
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleInputField = (e) => {
     setSearchQuery(e.target.value);
@@ -29,6 +30,7 @@ function App() {
 
     setSearchQuery('');
     inputRef.current.blur();
+    navigate('/');
   }
 
   // handle favourite items
@@ -46,7 +48,7 @@ function App() {
       const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${searchQuery}`);
       if (!res.ok) throw new Error('Something went wrong!');
       const data = await res.json();
-      if (data.results === 0) throw new Error('No recipes found!')
+      if (data.results === 0) throw new Error('No recipe found!')
       setRecipes(data?.data.recipes);
       setLoading(false);
     }
