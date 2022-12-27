@@ -9,10 +9,11 @@ const Navbar = ({ searchQuery, handleInputField, handleFormSubmit, inputRef, sav
   }
 
   return (
-    <nav className="navbar flex justify-between items-center py-8">
+    <nav className="navbar flex lg:flex-row sm:gap-5 sm:flex-col justify-between items-center py-8">
       <div className="logo">
         <h2 className="font-bold italic text-2xl">food<span className="text-rose-500">verse</span></h2>
       </div>
+
       <form onSubmit={(e) => handleFormSubmit(e)}>
         <input
           ref={inputRef}
@@ -22,9 +23,17 @@ const Navbar = ({ searchQuery, handleInputField, handleFormSubmit, inputRef, sav
           type="search"
           placeholder="Search recipe..." />
       </form>
+
       <div className="menu flex gap-5 text-gray-400 hover:text-gray-600 duration-300">
-        <NavLink style={navActive} to='/'>Home</NavLink>
-        <NavLink style={navActive} to='/favourites'>Favourites <span className="text-sky-400 font-extrabold">({savedFavouriteItem.length})</span> </NavLink>
+        <NavLink
+          style={navActive}
+          to='/'>Home
+        </NavLink>
+        <NavLink
+          style={navActive}
+          to='/favourites'>Favourites
+          <span className="text-sky-400 font-extrabold">({savedFavouriteItem.length})</span>
+        </NavLink>
       </div>
     </nav>
   );

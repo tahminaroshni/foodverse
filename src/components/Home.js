@@ -17,7 +17,7 @@ const Home = ({ recipes, loading, error }) => {
       {
         loading
           ?
-          (error ? <p>{error}</p> : <Spinner />)
+          (error ? <p className="text-rose-700 text-4xl mt-10">{error}</p> : <Spinner />)
           :
           recipes.map(recipe => <Recipe key={recipe.id} recipe={recipe} />)
       }
