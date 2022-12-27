@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+
 import Favourites from "./components/Favourites";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
@@ -20,6 +21,7 @@ function App() {
   const inputRef = useRef(null);
   const navigate = useNavigate();
 
+  // handle search field
   const handleInputField = (e) => {
     setSearchQuery(e.target.value);
   }
@@ -42,6 +44,7 @@ function App() {
     localStorage.setItem('recipes', JSON.stringify(savedFavouriteItem));
   }, [savedFavouriteItem])
 
+  // fetch data using search query
   const getData = async () => {
     try {
       setLoading(true);
@@ -60,11 +63,24 @@ function App() {
   return (
     <>
       <div className="App min-h-screen bg-rose-50 text-gray-600 text-lg  md:px-10">
-        <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleInputField={handleInputField} inputRef={inputRef} handleFormSubmit={handleFormSubmit} savedFavouriteItem={savedFavouriteItem} />
+        <Navbar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          handleInputField={handleInputField}
+          inputRef={inputRef}
+          handleFormSubmit={handleFormSubmit}
+          savedFavouriteItem={savedFavouriteItem}
+        />
         <Routes>
-          <Route path="/" element={<Home recipes={recipes} loading={loading} error={error} />} />
-          <Route path="/favourites" element={<Favourites savedFavouriteItem={savedFavouriteItem} setSavedFavouriteItem={setSavedFavouriteItem} />} />
-          <Route path='/recipe-item/:id' element={<RecipeItem handleFavouriteItem={handleFavouriteItem} savedFavouriteItem={savedFavouriteItem} setSavedFavouriteItem={setSavedFavouriteItem} />} />
+          <Route
+            path="/"
+            element={<Home recipes={recipes} loading={loading} error={error} />} />
+          <Route
+            path="/favourites"
+            element={<Favourites savedFavouriteItem={savedFavouriteItem} setSavedFavouriteItem={setSavedFavouriteItem} />} />
+          <Route
+            path='/recipe-item/:id'
+            element={<RecipeItem handleFavouriteItem={handleFavouriteItem} savedFavouriteItem={savedFavouriteItem} setSavedFavouriteItem={setSavedFavouriteItem} />} />
           <Route
             path="*"
             element={<NotFound />} />
